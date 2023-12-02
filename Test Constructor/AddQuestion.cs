@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace Test_Constructor
 {
-    public partial class Form1 : Form
+    public partial class AddQuestion : Form
     {
-        public Form1()
+        public AddQuestion()
         {
             InitializeComponent();
-        }
-
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
