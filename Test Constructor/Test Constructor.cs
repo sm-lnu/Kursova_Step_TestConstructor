@@ -27,8 +27,6 @@ namespace Test_Constructor
         private void unlockElements()
         {
             button1.Enabled = true;
-            button2.Enabled = true;
-            button3.Enabled = true;
 
             textBox1.Enabled = true;
             textBox2.Enabled = true;

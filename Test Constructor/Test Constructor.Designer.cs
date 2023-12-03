@@ -62,6 +62,9 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.errLabelCountOfQuestions = new System.Windows.Forms.Label();
+            this.errLabelMaximumPointsForTest = new System.Windows.Forms.Label();
+            this.errLabelMinimumPassingPercent = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -144,7 +147,7 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(155, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem1.Text = "Create new test";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
@@ -152,25 +155,25 @@
             // 
             this.toolStripMenuItem3.Enabled = false;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(155, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem3.Text = "Save test";
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Enabled = false;
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(155, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem4.Text = "Close test";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(155, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem5.Text = "Exit";
             // 
             // label1
@@ -202,7 +205,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(158, 200);
+            this.label3.Location = new System.Drawing.Point(173, 200);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(105, 13);
             this.label3.TabIndex = 7;
@@ -219,6 +222,7 @@
             // 
             // button3
             // 
+            this.button3.ForeColor = System.Drawing.Color.Maroon;
             this.button3.Location = new System.Drawing.Point(609, 19);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(123, 23);
@@ -228,6 +232,7 @@
             // 
             // button2
             // 
+            this.button2.ForeColor = System.Drawing.Color.Navy;
             this.button2.Location = new System.Drawing.Point(480, 19);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(123, 23);
@@ -237,6 +242,7 @@
             // 
             // button1
             // 
+            this.button1.ForeColor = System.Drawing.Color.Green;
             this.button1.Location = new System.Drawing.Point(351, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(123, 23);
@@ -247,6 +253,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.errLabelMinimumPassingPercent);
+            this.groupBox2.Controls.Add(this.errLabelMaximumPointsForTest);
+            this.groupBox2.Controls.Add(this.errLabelCountOfQuestions);
             this.groupBox2.Controls.Add(this.numericUpDown1);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.textBox5);
@@ -280,9 +289,9 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(12, 397);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(125, 13);
+            this.label9.Size = new System.Drawing.Size(126, 13);
             this.label9.TabIndex = 16;
-            this.label9.Text = "Minimum passing persent";
+            this.label9.Text = "Minimum passing percent";
             // 
             // textBox5
             // 
@@ -312,9 +321,9 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(12, 345);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(90, 13);
+            this.label8.Size = new System.Drawing.Size(95, 13);
             this.label8.TabIndex = 12;
-            this.label8.Text = "Count of question";
+            this.label8.Text = "Count of questions";
             // 
             // textBox4
             // 
@@ -373,6 +382,30 @@
             this.textBox1.Size = new System.Drawing.Size(148, 20);
             this.textBox1.TabIndex = 5;
             // 
+            // errLabelCountOfQuestions
+            // 
+            this.errLabelCountOfQuestions.AutoSize = true;
+            this.errLabelCountOfQuestions.Location = new System.Drawing.Point(12, 332);
+            this.errLabelCountOfQuestions.Name = "errLabelCountOfQuestions";
+            this.errLabelCountOfQuestions.Size = new System.Drawing.Size(0, 13);
+            this.errLabelCountOfQuestions.TabIndex = 7;
+            // 
+            // errLabelMaximumPointsForTest
+            // 
+            this.errLabelMaximumPointsForTest.AutoSize = true;
+            this.errLabelMaximumPointsForTest.Location = new System.Drawing.Point(12, 358);
+            this.errLabelMaximumPointsForTest.Name = "errLabelMaximumPointsForTest";
+            this.errLabelMaximumPointsForTest.Size = new System.Drawing.Size(0, 13);
+            this.errLabelMaximumPointsForTest.TabIndex = 18;
+            // 
+            // errLabelMinimumPassingPercent
+            // 
+            this.errLabelMinimumPassingPercent.AutoSize = true;
+            this.errLabelMinimumPassingPercent.Location = new System.Drawing.Point(12, 384);
+            this.errLabelMinimumPassingPercent.Name = "errLabelMinimumPassingPercent";
+            this.errLabelMinimumPassingPercent.Size = new System.Drawing.Size(0, 13);
+            this.errLabelMinimumPassingPercent.TabIndex = 19;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -383,8 +416,10 @@
             this.Controls.Add(this.groupBox2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximumSize = new System.Drawing.Size(1046, 505);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.ShowIcon = false;
+            this.Text = "Test Constructor";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -436,6 +471,9 @@
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label errLabelCountOfQuestions;
+        private System.Windows.Forms.Label errLabelMinimumPassingPercent;
+        private System.Windows.Forms.Label errLabelMaximumPointsForTest;
     }
 }
 
