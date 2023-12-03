@@ -53,8 +53,8 @@ namespace Test_Constructor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AddQuestion addQuestion = new AddQuestion();
-            addQuestion.ShowDialog();
+            AddQuestion addQuestionForm = new AddQuestion();
+            addQuestionForm.ShowDialog();
         }
     }
 }

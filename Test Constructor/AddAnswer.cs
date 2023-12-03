@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace Test_Constructor
 {
-    public partial class AddQuestion : Form
+    public partial class AddAnswer : Form
     {
-        public AddQuestion()
+        public AddAnswer()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            AddAnswer addAnswerForm = new AddAnswer();
-            addAnswerForm.ShowDialog();
         }
     }
 }

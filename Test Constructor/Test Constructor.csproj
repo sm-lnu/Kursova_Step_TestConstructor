@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddAnswer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddAnswer.Designer.cs">
+      <DependentUpon>AddAnswer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Additional Classes\Test.cs" />
     <Compile Include="AddQuestion.cs">
       <SubType>Form</SubType>
@@ -64,6 +70,9 @@
     <Compile Include="Additional Classes\Question.cs" />
     <Compile Include="Additional Classes\SerializationDeserializationQuestion\SerializeDeserializeQuestion.cs" />
     <Compile Include="Settings.cs" />
+    <EmbeddedResource Include="AddAnswer.resx">
+      <DependentUpon>AddAnswer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddQuestion.resx">
       <DependentUpon>AddQuestion.cs</DependentUpon>
     </EmbeddedResource>
