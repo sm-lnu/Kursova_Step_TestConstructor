@@ -52,6 +52,7 @@
     <Compile Include="AddAnswer.Designer.cs">
       <DependentUpon>AddAnswer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Additional Classes\Answer.cs" />
     <Compile Include="Additional Classes\Test.cs" />
     <Compile Include="AddQuestion.cs">
       <SubType>Form</SubType>
