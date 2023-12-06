@@ -16,5 +16,9 @@ namespace Test_Constructor.Additional_Classes
             this.textOfAnswer = textOfAnswer;
             this.isTrueAnswer = isTrueAnswer;
         }
+
+        public Answer()
+        {
+        }
     }
 }

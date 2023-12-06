@@ -9,9 +9,16 @@ namespace Test_Constructor
         public Answer answer { get; private set; }
         public event EventHandler AnswerReturned;
 
-        public AddAnswer()
+        public AddAnswer(Answer rAnswer)
         {
             InitializeComponent();
+            if (rAnswer == null)
+                answer = new Answer();
+            else
+            {
+                answer = rAnswer;
+                setDataFromReceivedAnswer();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e) => invokeAnswerReturned();
@@ -34,6 +41,11 @@ namespace Test_Constructor
         {
             AnswerReturned?.Invoke(this, EventArgs.Empty);
             this.Close();
+        }
+        private void setDataFromReceivedAnswer()
+        {
+            textBox1.Text = answer.textOfAnswer;
+            checkBox1.Checked = answer.isTrueAnswer;
         }
     }
 }

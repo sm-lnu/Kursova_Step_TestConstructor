@@ -20,7 +20,7 @@ namespace Test_Constructor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (AddAnswer addAnswer = new AddAnswer())
+            using (AddAnswer addAnswer = new AddAnswer(null))
             {
                 addAnswer.AnswerReturned += AddAnswerForm_AnswerReturned;
                 addAnswer.ShowDialog();
@@ -67,24 +67,6 @@ namespace Test_Constructor
         private bool isListOfAnswersEmpty() => question.answers.Count == 0;
         private bool isAtLeastOneTrue()=>question.answers.Any(answer => answer.isTrueAnswer);
 
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
-        {
-            SelectAndManipulateRow();
-        }
-
-        private void SelectAndManipulateRow()
-        {
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
-                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
-
-                string name = selectedRow.Cells["Name"].Value.ToString();
-                bool isTrueAnswer = (bool)selectedRow.Cells[""].Value;
-            }
-            else
-                MessageBox.Show("No row selected.");
-        }
-
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -92,38 +74,52 @@ namespace Test_Constructor
             else
                 selectedRowIndex = -1;
         }
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            (string textOfAnswer, bool isTrueAnswer) = getDataFromDataGridView();
+            int indexOfEditingAnswer = question.answers
+                   .FindIndex(a => a.textOfAnswer == textOfAnswer && a.isTrueAnswer == isTrueAnswer);
 
+            if (indexOfEditingAnswer!=-1) {
+                AddAnswer addAnswer = new AddAnswer(question.answers[indexOfEditingAnswer]);
+                addAnswer.ShowDialog();
+
+                Answer returnedAnswer = addAnswer.answer;
+
+                if (returnedAnswer != null)
+                {
+                    question.answers[indexOfEditingAnswer] = returnedAnswer;
+                    editRowInDataGridView(returnedAnswer);
+                }
+            }
+        }
         private void button3_Click(object sender, EventArgs e)
         {
-            if (selectedRowIndex >= 0 && selectedRowIndex < dataGridView1.Rows.Count)
-            {
-                (string textOfAnswer, bool isTrueAnswer) = getDataFromDataGridView();
-                question.answers
+            (string textOfAnswer, bool isTrueAnswer) = getDataFromDataGridView();
+            question.answers
                     .RemoveAll(a => a.textOfAnswer == textOfAnswer && a.isTrueAnswer == isTrueAnswer);
-                dataGridView1.Rows.RemoveAt(selectedRowIndex);
-            }
-            else
-                MessageBox.Show("No row selected.");
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //realize
-            //if (selectedRowIndex >= 0 && selectedRowIndex < dataGridView1.Rows.Count)
-            //{
-            //    DataGridViewRow selectedRow = dataGridView1.Rows[selectedRowIndex];
-
-            //    string textOfAnswer = selectedRow.Cells["textOfAnswer"].Value.ToString();
-            //    bool isTrueAnswer = (bool)selectedRow.Cells["isTrueAnswer"].Value;
-            //}
+            dataGridView1.Rows.RemoveAt(selectedRowIndex);
         }
         private (string,bool) getDataFromDataGridView()
         {
-            DataGridViewRow selectedRow = dataGridView1.Rows[selectedRowIndex];
+            if (selectedRowIndex >= 0 && selectedRowIndex < dataGridView1.Rows.Count)
+            {
+                DataGridViewRow selectedRow = dataGridView1.Rows[selectedRowIndex];
 
-            string textOfAnswer = selectedRow.Cells[0].Value.ToString();
-            bool isTrueAnswer = (bool)selectedRow.Cells[1].Value;
-            return (textOfAnswer,isTrueAnswer);
+                string textOfAnswer = selectedRow.Cells[0].Value.ToString();
+                bool isTrueAnswer = (bool)selectedRow.Cells[1].Value;
+                return (textOfAnswer, isTrueAnswer);
+            }
+            else
+                MessageBox.Show("No row selected.");
+            return (null, false);
+        }
+        private void editRowInDataGridView(Answer answer)
+        {
+            dataGridView1.Rows[selectedRowIndex].Cells[0].Value = answer.textOfAnswer;
+            dataGridView1.Rows[selectedRowIndex].Cells[1].Value = answer.isTrueAnswer;
+
+            dataGridView1.Refresh();
         }
     }
 }
