@@ -213,6 +213,7 @@
             this.button7.TabIndex = 14;
             this.button7.Text = "Cancel";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // errLabelTextOfQuestion
             // 
