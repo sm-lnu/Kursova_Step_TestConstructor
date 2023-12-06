@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Test_Constructor
@@ -15,48 +8,37 @@ namespace Test_Constructor
         public Form1()
         {
             InitializeComponent();
-            lockElements();
+            lockOrElements(false);
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            unlockElements();
-            button1.Enabled = true;
+            lockOrElements(true);
         }
 
-        private void unlockElements()
+        private void lockOrElements(bool value)
         {
-            button1.Enabled = true;
-            button2.Enabled = true;
-            button3.Enabled = true;
+            button1.Enabled = value;
+            button2.Enabled = value;
+            button3.Enabled = value;
 
-            textBox1.Enabled = true;
-            textBox2.Enabled = true;
-            textBox3.Enabled = true;
-            textBox4.Enabled = true;
-            textBox5.Enabled = true;
-            textBox6.Enabled = true;
-            numericUpDown1.Enabled = true;
-        }
-        private void lockElements()
-        {
-            button1.Enabled = false;
-            button2.Enabled = false;
-            button3.Enabled = false;
+            dataGridView1.Enabled = value;
+            dataGridView2.Enabled = value;
 
-            textBox1.Enabled = false;
-            textBox2.Enabled = false;
-            textBox3.Enabled = false;
-            textBox4.Enabled = false;
-            textBox5.Enabled = false;
-            textBox6.Enabled = false;
-            numericUpDown1.Enabled = false;
+            textBox1.Enabled = value;
+            textBox2.Enabled = value;
+            textBox3.Enabled = value;
+            textBox4.Enabled = value;
+            textBox5.Enabled = value;
+            textBox6.Enabled = value;
+
+            numericUpDown1.Enabled = value;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AddQuestion addQuestion = new AddQuestion();
-            addQuestion.ShowDialog();
+            AddQuestion addQuestionForm = new AddQuestion();
+            addQuestionForm.ShowDialog();
         }
     }
 }
