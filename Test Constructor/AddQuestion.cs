@@ -31,7 +31,10 @@ namespace Test_Constructor
             Answer returnedAnswer = addAnswerForm.answer;
 
             if (returnedAnswer != null)
+            {
                 question.addAnswer(returnedAnswer);
+                dataGridView1.Rows.Add(returnedAnswer.textOfAnswer,returnedAnswer.isTrueAnswer);
+            }
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {

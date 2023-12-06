@@ -26,7 +26,7 @@ namespace Test_Constructor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text!=null & checkBox1.Checked!=false) 
+            if (textBox1.Text!=null) 
                 answer = new Answer(textBox1.Text, checkBox1.Checked);
             invokeAnswerReturned();
         }
