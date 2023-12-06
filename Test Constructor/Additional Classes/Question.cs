@@ -7,7 +7,7 @@ namespace Test_Constructor.Additional_Classes
     {
         public String textOfQuestion { get; set; }
         public decimal points { get; set; }
-        public byte[] image { get; set; }
+        public string image { get; set; }
         public List<Answer> answers { get; set; }
         public Question() => createListOfAnswers();
         public Question(decimal points)

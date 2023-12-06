@@ -2,7 +2,10 @@
 using System.Windows.Forms;
 using System.Linq;
 using Test_Constructor.Additional_Classes;
-using System.Collections.Generic;
+using System.Drawing;
+using System.Text;
+using System.Xml;
+using System.IO;
 
 namespace Test_Constructor
 {
@@ -120,6 +123,32 @@ namespace Test_Constructor
             dataGridView1.Rows[selectedRowIndex].Cells[1].Value = answer.isTrueAnswer;
 
             dataGridView1.Refresh();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files|*.*";
+                openFileDialog.Title = "Select an Image File";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedFilePath = openFileDialog.FileName;
+                    Image selectedImage = Image.FromFile(selectedFilePath);
+                    question.image = ImageToBase64(selectedImage, System.Drawing.Imaging.ImageFormat.Png);
+                }
+            }
+        }
+
+        private string ImageToBase64(Image image, System.Drawing.Imaging.ImageFormat format)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, format);
+                byte[] imageBytes = ms.ToArray();
+                return Convert.ToBase64String(imageBytes);
+            }
         }
     }
 }
