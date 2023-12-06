@@ -45,7 +45,8 @@
             this.button7 = new System.Windows.Forms.Button();
             this.errLabelTextOfQuestion = new System.Windows.Forms.Label();
             this.errLabelAnswers = new System.Windows.Forms.Label();
-            this.errLabelPoints = new System.Windows.Forms.Label();
+            this.textOfAnswer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isTrueAnswer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -85,6 +86,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(194, 37);
             this.textBox1.TabIndex = 3;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // numericUpDown1
             // 
@@ -113,6 +115,9 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.textOfAnswer,
+            this.isTrueAnswer});
             this.dataGridView1.Location = new System.Drawing.Point(214, 48);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(298, 367);
@@ -178,6 +183,7 @@
             this.button6.TabIndex = 13;
             this.button6.Text = "Save";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -192,33 +198,44 @@
             // errLabelTextOfQuestion
             // 
             this.errLabelTextOfQuestion.AutoSize = true;
-            this.errLabelTextOfQuestion.Location = new System.Drawing.Point(98, 9);
+            this.errLabelTextOfQuestion.ForeColor = System.Drawing.Color.Maroon;
+            this.errLabelTextOfQuestion.Location = new System.Drawing.Point(90, 9);
             this.errLabelTextOfQuestion.Name = "errLabelTextOfQuestion";
-            this.errLabelTextOfQuestion.Size = new System.Drawing.Size(0, 13);
+            this.errLabelTextOfQuestion.Size = new System.Drawing.Size(113, 13);
             this.errLabelTextOfQuestion.TabIndex = 15;
+            this.errLabelTextOfQuestion.Text = "Incorrect, text is empty";
+            this.errLabelTextOfQuestion.Visible = false;
             // 
             // errLabelAnswers
             // 
             this.errLabelAnswers.AutoSize = true;
+            this.errLabelAnswers.ForeColor = System.Drawing.Color.Maroon;
             this.errLabelAnswers.Location = new System.Drawing.Point(262, 9);
             this.errLabelAnswers.Name = "errLabelAnswers";
-            this.errLabelAnswers.Size = new System.Drawing.Size(0, 13);
+            this.errLabelAnswers.Size = new System.Drawing.Size(208, 13);
             this.errLabelAnswers.TabIndex = 16;
+            this.errLabelAnswers.Text = "Incorrect, at least one answer must be true";
+            this.errLabelAnswers.Visible = false;
             // 
-            // errLabelPoints
+            // textOfAnswer
             // 
-            this.errLabelPoints.AutoSize = true;
-            this.errLabelPoints.Location = new System.Drawing.Point(54, 65);
-            this.errLabelPoints.Name = "errLabelPoints";
-            this.errLabelPoints.Size = new System.Drawing.Size(0, 13);
-            this.errLabelPoints.TabIndex = 17;
+            this.textOfAnswer.HeaderText = "Text of answer";
+            this.textOfAnswer.Name = "textOfAnswer";
+            this.textOfAnswer.ReadOnly = true;
+            // 
+            // isTrueAnswer
+            // 
+            this.isTrueAnswer.HeaderText = "Is true answer";
+            this.isTrueAnswer.Name = "isTrueAnswer";
+            this.isTrueAnswer.ReadOnly = true;
+            this.isTrueAnswer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.isTrueAnswer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // AddQuestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 450);
-            this.Controls.Add(this.errLabelPoints);
             this.Controls.Add(this.errLabelAnswers);
             this.Controls.Add(this.errLabelTextOfQuestion);
             this.Controls.Add(this.button7);
@@ -266,6 +283,7 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label errLabelTextOfQuestion;
         private System.Windows.Forms.Label errLabelAnswers;
-        private System.Windows.Forms.Label errLabelPoints;
+        private System.Windows.Forms.DataGridViewTextBoxColumn textOfAnswer;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isTrueAnswer;
     }
 }
