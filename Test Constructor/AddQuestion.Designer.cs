@@ -36,6 +36,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.textOfAnswer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isTrueAnswer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -45,8 +47,6 @@
             this.button7 = new System.Windows.Forms.Button();
             this.errLabelTextOfQuestion = new System.Windows.Forms.Label();
             this.errLabelAnswers = new System.Windows.Forms.Label();
-            this.textOfAnswer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isTrueAnswer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -122,6 +122,21 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(298, 367);
             this.dataGridView1.TabIndex = 7;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            // 
+            // textOfAnswer
+            // 
+            this.textOfAnswer.HeaderText = "Text of answer";
+            this.textOfAnswer.Name = "textOfAnswer";
+            this.textOfAnswer.ReadOnly = true;
+            // 
+            // isTrueAnswer
+            // 
+            this.isTrueAnswer.HeaderText = "Is true answer";
+            this.isTrueAnswer.Name = "isTrueAnswer";
+            this.isTrueAnswer.ReadOnly = true;
+            this.isTrueAnswer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.isTrueAnswer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // button1
             // 
@@ -143,6 +158,7 @@
             this.button2.TabIndex = 9;
             this.button2.Text = "Edit";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -153,6 +169,7 @@
             this.button3.TabIndex = 10;
             this.button3.Text = "Delete";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -216,20 +233,6 @@
             this.errLabelAnswers.TabIndex = 16;
             this.errLabelAnswers.Text = "Incorrect, at least one answer must be true";
             this.errLabelAnswers.Visible = false;
-            // 
-            // textOfAnswer
-            // 
-            this.textOfAnswer.HeaderText = "Text of answer";
-            this.textOfAnswer.Name = "textOfAnswer";
-            this.textOfAnswer.ReadOnly = true;
-            // 
-            // isTrueAnswer
-            // 
-            this.isTrueAnswer.HeaderText = "Is true answer";
-            this.isTrueAnswer.Name = "isTrueAnswer";
-            this.isTrueAnswer.ReadOnly = true;
-            this.isTrueAnswer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.isTrueAnswer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // AddQuestion
             // 
