@@ -136,19 +136,15 @@ namespace Test_Constructor
                 {
                     string selectedFilePath = openFileDialog.FileName;
                     Image selectedImage = Image.FromFile(selectedFilePath);
-                    question.image = ImageToBase64(selectedImage, System.Drawing.Imaging.ImageFormat.Png);
+                    pictureBox1.Image = selectedImage;
                 }
             }
         }
 
-        private string ImageToBase64(Image image, System.Drawing.Imaging.ImageFormat format)
+        private void button5_Click(object sender, EventArgs e)
         {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                image.Save(ms, format);
-                byte[] imageBytes = ms.ToArray();
-                return Convert.ToBase64String(imageBytes);
-            }
+            pictureBox1.Image = null;
+            question.image = null;
         }
     }
 }
