@@ -63,11 +63,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.openTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.TextOfAnswer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isTrueAnswer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.text_of_question = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.points = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.count_of_answers = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TextOfAnswer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isTrueAnswer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -218,6 +218,7 @@
             this.button3.TabIndex = 5;
             this.button3.Text = "Delete question";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -228,6 +229,7 @@
             this.button2.TabIndex = 4;
             this.button2.Text = "Edit question";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -401,18 +403,6 @@
             this.openTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openTestToolStripMenuItem.Text = "Open test";
             // 
-            // TextOfAnswer
-            // 
-            this.TextOfAnswer.HeaderText = "Text of answer";
-            this.TextOfAnswer.Name = "TextOfAnswer";
-            this.TextOfAnswer.ReadOnly = true;
-            // 
-            // isTrueAnswer
-            // 
-            this.isTrueAnswer.HeaderText = "Is true answer";
-            this.isTrueAnswer.Name = "isTrueAnswer";
-            this.isTrueAnswer.ReadOnly = true;
-            // 
             // text_of_question
             // 
             this.text_of_question.HeaderText = "Text of question";
@@ -431,6 +421,20 @@
             this.count_of_answers.HeaderText = "Count of answers";
             this.count_of_answers.Name = "count_of_answers";
             this.count_of_answers.ReadOnly = true;
+            // 
+            // TextOfAnswer
+            // 
+            this.TextOfAnswer.HeaderText = "Text of answer";
+            this.TextOfAnswer.Name = "TextOfAnswer";
+            this.TextOfAnswer.ReadOnly = true;
+            // 
+            // isTrueAnswer
+            // 
+            this.isTrueAnswer.HeaderText = "Is true answer";
+            this.isTrueAnswer.Name = "isTrueAnswer";
+            this.isTrueAnswer.ReadOnly = true;
+            this.isTrueAnswer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.isTrueAnswer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Form1
             // 
@@ -498,11 +502,11 @@
         private System.Windows.Forms.Label errLabelMinimumPassingPercent;
         private System.Windows.Forms.Label errLabelMaximumPointsForTest;
         private System.Windows.Forms.ToolStripMenuItem openTestToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TextOfAnswer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn isTrueAnswer;
         private System.Windows.Forms.DataGridViewTextBoxColumn text_of_question;
         private System.Windows.Forms.DataGridViewTextBoxColumn points;
         private System.Windows.Forms.DataGridViewTextBoxColumn count_of_answers;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TextOfAnswer;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isTrueAnswer;
     }
 }
 

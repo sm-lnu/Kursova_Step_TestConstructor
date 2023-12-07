@@ -58,6 +58,9 @@ namespace Test_Constructor
             {
                 test.questions.Add(returnedQuestion);
                 dataGridView1.Rows.Add(returnedQuestion.textOfQuestion, returnedQuestion.points,returnedQuestion.answers.Count);
+
+                dataGridView1.Refresh();
+                dataGridView2.Refresh();
             }
         }
 
@@ -82,5 +85,46 @@ namespace Test_Constructor
                 }
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (selectedRowIndex >= 0 && selectedRowIndex < dataGridView1.Rows.Count && test.questions.Count-1 >= selectedRowIndex) {
+                test.questions
+                        .RemoveAt(selectedRowIndex);
+                dataGridView1.Rows.RemoveAt(selectedRowIndex);
+
+                dataGridView1.Refresh();
+                dataGridView2.Refresh();
+            }
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (selectedRowIndex >= 0 && selectedRowIndex < dataGridView1.Rows.Count && test.questions.Count - 1 >= selectedRowIndex)
+            {
+                using (AddQuestion addQuestion = new AddQuestion(test.questions[selectedRowIndex]))
+                {
+                    addQuestion.ShowDialog();
+
+                    Question returnedQuestion = addQuestion.question;
+
+                    if (returnedQuestion != null)
+                    {
+                        test.questions[selectedRowIndex] = returnedQuestion;
+                        editRowInDataGridView(returnedQuestion);
+                    }
+                }
+            }
+        }
+
+        private void editRowInDataGridView(Question question)
+        {
+            dataGridView1.Rows[selectedRowIndex].Cells[0].Value = question.textOfQuestion;
+            dataGridView1.Rows[selectedRowIndex].Cells[1].Value = question.points;
+            dataGridView1.Rows[selectedRowIndex].Cells[2].Value = question.answers.Count;
+
+            dataGridView1.Refresh();
+            dataGridView2.Refresh();
+        }
+
     }
 }

@@ -19,6 +19,8 @@ namespace Test_Constructor
         {
             InitializeComponent();
             this.question = question;
+            if (question.answers.Count != 0)
+                fillFieldsFromExistingQuestion();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -99,9 +101,11 @@ namespace Test_Constructor
         private void button3_Click(object sender, EventArgs e)
         {
             (string textOfAnswer, bool isTrueAnswer) = getDataFromDataGridView();
-            question.answers
-                    .RemoveAll(a => a.textOfAnswer == textOfAnswer && a.isTrueAnswer == isTrueAnswer);
-            dataGridView1.Rows.RemoveAt(selectedRowIndex);
+            if (textOfAnswer!=null) {
+                question.answers
+                        .RemoveAll(a => a.textOfAnswer == textOfAnswer && a.isTrueAnswer == isTrueAnswer);
+                dataGridView1.Rows.RemoveAt(selectedRowIndex);
+            }
         }
         private (string,bool) getDataFromDataGridView()
         {
@@ -158,6 +162,19 @@ namespace Test_Constructor
         private void button7_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void fillFieldsFromExistingQuestion()
+        {
+            textBox1.Text = question.textOfQuestion;
+            numericUpDown1.Value = question.points;
+            pictureBox1.Image = question.image;
+            foreach(var a in question.answers)
+                dataGridView1.Rows.Add(a.textOfAnswer, a.isTrueAnswer);
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            question.points = numericUpDown1.Value;
         }
     }
 }
