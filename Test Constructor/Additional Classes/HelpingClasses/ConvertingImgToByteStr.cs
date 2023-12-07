@@ -10,7 +10,7 @@ namespace Test_Constructor.Additional_Classes.SerializationDeserializationQuesti
 {
     internal class ConvertingImageToBase64
     {
-        private string ImageToBase64(Image image, System.Drawing.Imaging.ImageFormat format)
+        public string ImageToBase64(Image image, System.Drawing.Imaging.ImageFormat format)
         {
             using (MemoryStream ms = new MemoryStream())
             {

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics.Eventing.Reader;
+using System.IO;
 using System.Windows.Forms;
 using Test_Constructor.Additional_Classes;
+using Test_Constructor.SerializationDeserializationQuestion;
 
 namespace Test_Constructor
 {
@@ -175,6 +177,63 @@ namespace Test_Constructor
             }
             else
                 errLabelMinimumPassingPercent.Visible = true;
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "XML Files|*.xml|All Files|*.*";
+                saveFileDialog.Title = "Save XML File";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedFilePath = saveFileDialog.FileName;
+
+                    XmlSerializerHelper<Test> xmlSerializerHelper = new XmlSerializerHelper<Test>();
+                    string serializedXml = xmlSerializerHelper.SerializeToXml(test);
+
+                    File.WriteAllText(selectedFilePath, serializedXml);
+
+                    MessageBox.Show("XML file saved successfully!");
+                }
+            }
+        }
+
+        private void openTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string selectedFilePath = OpenFileExplorer();
+
+            if (!string.IsNullOrEmpty(selectedFilePath))
+            {
+                string xml = File.ReadAllText(selectedFilePath);
+                if (xml != null)
+                {
+                    XmlSerializerHelper<Test> xmlSerializerHelper = new XmlSerializerHelper<Test>();
+                    Test deserializedTest = xmlSerializerHelper.DeserializeFromXml(xml);
+                    test = deserializedTest;
+                    fillTestFields();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to deserialize the object.");
+                }
+            }
+            else
+                MessageBox.Show("No file selected.");
+        }
+        private string OpenFileExplorer()
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+               openFileDialog.Filter = "XML Files|*.xml|All Files|*.*";
+               openFileDialog.Title = "Select an XML File";
+
+               if (openFileDialog.ShowDialog() == DialogResult.OK)
+                  return openFileDialog.FileName;
+
+               return string.Empty;
+            }
         }
     }
 }
