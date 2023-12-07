@@ -158,7 +158,7 @@ namespace Test_Constructor
         {
             try
             {
-                test.maximumPointsForTest = int.Parse(textBox5.Text);
+                test.maximumPointsForTest = double.Parse(textBox5.Text);
                 errLabelMaximumPointsForTest.Visible = false;
             }
             catch (FormatException)
@@ -234,6 +234,22 @@ namespace Test_Constructor
 
                return string.Empty;
             }
+        }
+        private void fillTestFields()
+        {
+            textBox1.Text = test.author;
+            textBox2.Text = test.title;
+            textBox3.Text = test.description;
+            textBox4.Text = test.infoForTestTaker;
+            textBox5.Text = test.maximumPointsForTest.ToString();
+            numericUpDown1.Value = test.minimumPassingPercent;
+            foreach (var q in test.questions)
+                dataGridView1.Rows.Add(q.textOfQuestion,q.points,q.answers.Count);
+
+            lockOrElements(true);
+
+            dataGridView1.Refresh();
+            dataGridView2.Refresh();
         }
     }
 }
