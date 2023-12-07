@@ -7,6 +7,8 @@ namespace Test_Constructor
     public partial class Form1 : Form
     {
         private Test test;
+        private int selectedRowIndex = -1;
+
         public Form1()
         {
             InitializeComponent();
@@ -56,6 +58,28 @@ namespace Test_Constructor
             {
                 test.questions.Add(returnedQuestion);
                 dataGridView1.Rows.Add(returnedQuestion.textOfQuestion, returnedQuestion.points,returnedQuestion.answers.Count);
+            }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+                selectedRowIndex = e.RowIndex;
+            else
+                selectedRowIndex = -1;
+
+            if (selectedRowIndex!=-1)
+            {
+
+                if (selectedRowIndex <= test.questions.Count-1) {
+                    dataGridView2.Rows.Clear();
+                    Question question = test.questions[selectedRowIndex];
+                    foreach (var a in question.answers)
+                        dataGridView2.Rows.Add(a.textOfAnswer, a.isTrueAnswer);
+
+                    pictureBox1.Image = question.image;
+                    dataGridView2.Refresh();
+                }
             }
         }
     }

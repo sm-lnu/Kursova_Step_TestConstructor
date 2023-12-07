@@ -117,13 +117,6 @@ namespace Test_Constructor
                 MessageBox.Show("No row selected.");
             return (null, false);
         }
-        private void editRowInDataGridView(Answer answer)
-        {
-            dataGridView1.Rows[selectedRowIndex].Cells[0].Value = answer.textOfAnswer;
-            dataGridView1.Rows[selectedRowIndex].Cells[1].Value = answer.isTrueAnswer;
-
-            dataGridView1.Refresh();
-        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -135,12 +128,27 @@ namespace Test_Constructor
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string selectedFilePath = openFileDialog.FileName;
-                    Image selectedImage = Image.FromFile(selectedFilePath);
+                    Image selectedImage = LoadAndResizeImage(selectedFilePath);
                     pictureBox1.Image = selectedImage;
+                    question.image = selectedImage;
                 }
             }
         }
+        private Image LoadAndResizeImage(string imagePath)
+        {
+            Image originalImage = Image.FromFile(imagePath);
+            int desiredHeight = 295;
+            int proportionalWidth = (int)((float)desiredHeight / originalImage.Height * originalImage.Width);
+            Image resizedImage = new Bitmap(originalImage, new Size(proportionalWidth, desiredHeight));
+            return resizedImage;
+        }
+        private void editRowInDataGridView(Answer answer)
+        {
+            dataGridView1.Rows[selectedRowIndex].Cells[0].Value = answer.textOfAnswer;
+            dataGridView1.Rows[selectedRowIndex].Cells[1].Value = answer.isTrueAnswer;
 
+            dataGridView1.Refresh();
+        }
         private void button5_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = null;

@@ -62,10 +62,12 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.openTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TextOfAnswer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isTrueAnswer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.text_of_question = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.points = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.count_of_answers = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.openTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -87,10 +89,14 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(741, 150);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TextOfAnswer,
+            this.isTrueAnswer});
             this.dataGridView2.Location = new System.Drawing.Point(176, 216);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(571, 209);
@@ -389,27 +395,42 @@
             this.textBox1.Size = new System.Drawing.Size(148, 20);
             this.textBox1.TabIndex = 5;
             // 
+            // openTestToolStripMenuItem
+            // 
+            this.openTestToolStripMenuItem.Name = "openTestToolStripMenuItem";
+            this.openTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openTestToolStripMenuItem.Text = "Open test";
+            // 
+            // TextOfAnswer
+            // 
+            this.TextOfAnswer.HeaderText = "Text of answer";
+            this.TextOfAnswer.Name = "TextOfAnswer";
+            this.TextOfAnswer.ReadOnly = true;
+            // 
+            // isTrueAnswer
+            // 
+            this.isTrueAnswer.HeaderText = "Is true answer";
+            this.isTrueAnswer.Name = "isTrueAnswer";
+            this.isTrueAnswer.ReadOnly = true;
+            // 
             // text_of_question
             // 
             this.text_of_question.HeaderText = "Text of question";
             this.text_of_question.Name = "text_of_question";
+            this.text_of_question.ReadOnly = true;
             this.text_of_question.Width = 425;
             // 
             // points
             // 
             this.points.HeaderText = "Points";
             this.points.Name = "points";
+            this.points.ReadOnly = true;
             // 
             // count_of_answers
             // 
             this.count_of_answers.HeaderText = "Count of answers";
             this.count_of_answers.Name = "count_of_answers";
-            // 
-            // openTestToolStripMenuItem
-            // 
-            this.openTestToolStripMenuItem.Name = "openTestToolStripMenuItem";
-            this.openTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.openTestToolStripMenuItem.Text = "Open test";
+            this.count_of_answers.ReadOnly = true;
             // 
             // Form1
             // 
@@ -476,10 +497,12 @@
         private System.Windows.Forms.Label errLabelCountOfQuestions;
         private System.Windows.Forms.Label errLabelMinimumPassingPercent;
         private System.Windows.Forms.Label errLabelMaximumPointsForTest;
+        private System.Windows.Forms.ToolStripMenuItem openTestToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TextOfAnswer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn isTrueAnswer;
         private System.Windows.Forms.DataGridViewTextBoxColumn text_of_question;
         private System.Windows.Forms.DataGridViewTextBoxColumn points;
         private System.Windows.Forms.DataGridViewTextBoxColumn count_of_answers;
-        private System.Windows.Forms.ToolStripMenuItem openTestToolStripMenuItem;
     }
 }
 
