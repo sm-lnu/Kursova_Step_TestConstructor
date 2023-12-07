@@ -29,11 +29,17 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.text_of_question = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.points = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.count_of_answers = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.TextOfAnswer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isTrueAnswer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.openTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
@@ -48,13 +54,10 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.errLabelMinimumPassingPercent = new System.Windows.Forms.Label();
             this.errLabelMaximumPointsForTest = new System.Windows.Forms.Label();
-            this.errLabelCountOfQuestions = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -62,12 +65,6 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.openTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.text_of_question = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.points = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.count_of_answers = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TextOfAnswer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isTrueAnswer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -91,6 +88,25 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
+            // text_of_question
+            // 
+            this.text_of_question.HeaderText = "Text of question";
+            this.text_of_question.Name = "text_of_question";
+            this.text_of_question.ReadOnly = true;
+            this.text_of_question.Width = 425;
+            // 
+            // points
+            // 
+            this.points.HeaderText = "Points";
+            this.points.Name = "points";
+            this.points.ReadOnly = true;
+            // 
+            // count_of_answers
+            // 
+            this.count_of_answers.HeaderText = "Count of answers";
+            this.count_of_answers.Name = "count_of_answers";
+            this.count_of_answers.ReadOnly = true;
+            // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -101,6 +117,20 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(571, 209);
             this.dataGridView2.TabIndex = 1;
+            // 
+            // TextOfAnswer
+            // 
+            this.TextOfAnswer.HeaderText = "Text of answer";
+            this.TextOfAnswer.Name = "TextOfAnswer";
+            this.TextOfAnswer.ReadOnly = true;
+            // 
+            // isTrueAnswer
+            // 
+            this.isTrueAnswer.HeaderText = "Is true answer";
+            this.isTrueAnswer.Name = "isTrueAnswer";
+            this.isTrueAnswer.ReadOnly = true;
+            this.isTrueAnswer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.isTrueAnswer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // pictureBox1
             // 
@@ -139,6 +169,12 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(155, 22);
             this.toolStripMenuItem1.Text = "Create new test";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // openTestToolStripMenuItem
+            // 
+            this.openTestToolStripMenuItem.Name = "openTestToolStripMenuItem";
+            this.openTestToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.openTestToolStripMenuItem.Text = "Open test";
             // 
             // toolStripMenuItem3
             // 
@@ -246,13 +282,10 @@
             // 
             this.groupBox2.Controls.Add(this.errLabelMinimumPassingPercent);
             this.groupBox2.Controls.Add(this.errLabelMaximumPointsForTest);
-            this.groupBox2.Controls.Add(this.errLabelCountOfQuestions);
             this.groupBox2.Controls.Add(this.numericUpDown1);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.textBox5);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.textBox6);
-            this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.textBox4);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.textBox3);
@@ -271,38 +304,37 @@
             // errLabelMinimumPassingPercent
             // 
             this.errLabelMinimumPassingPercent.AutoSize = true;
-            this.errLabelMinimumPassingPercent.Location = new System.Drawing.Point(12, 384);
+            this.errLabelMinimumPassingPercent.ForeColor = System.Drawing.Color.Maroon;
+            this.errLabelMinimumPassingPercent.Location = new System.Drawing.Point(6, 378);
             this.errLabelMinimumPassingPercent.Name = "errLabelMinimumPassingPercent";
-            this.errLabelMinimumPassingPercent.Size = new System.Drawing.Size(0, 13);
+            this.errLabelMinimumPassingPercent.Size = new System.Drawing.Size(154, 13);
             this.errLabelMinimumPassingPercent.TabIndex = 19;
+            this.errLabelMinimumPassingPercent.Text = "Invalid, mind be upper than null";
+            this.errLabelMinimumPassingPercent.Visible = false;
             // 
             // errLabelMaximumPointsForTest
             // 
             this.errLabelMaximumPointsForTest.AutoSize = true;
-            this.errLabelMaximumPointsForTest.Location = new System.Drawing.Point(12, 358);
+            this.errLabelMaximumPointsForTest.ForeColor = System.Drawing.Color.Maroon;
+            this.errLabelMaximumPointsForTest.Location = new System.Drawing.Point(6, 342);
             this.errLabelMaximumPointsForTest.Name = "errLabelMaximumPointsForTest";
-            this.errLabelMaximumPointsForTest.Size = new System.Drawing.Size(0, 13);
+            this.errLabelMaximumPointsForTest.Size = new System.Drawing.Size(160, 13);
             this.errLabelMaximumPointsForTest.TabIndex = 18;
-            // 
-            // errLabelCountOfQuestions
-            // 
-            this.errLabelCountOfQuestions.AutoSize = true;
-            this.errLabelCountOfQuestions.Location = new System.Drawing.Point(12, 332);
-            this.errLabelCountOfQuestions.Name = "errLabelCountOfQuestions";
-            this.errLabelCountOfQuestions.Size = new System.Drawing.Size(0, 13);
-            this.errLabelCountOfQuestions.TabIndex = 7;
+            this.errLabelMaximumPointsForTest.Text = "Incorrect, points is in invalid type";
+            this.errLabelMaximumPointsForTest.Visible = false;
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(135, 397);
+            this.numericUpDown1.Location = new System.Drawing.Point(138, 394);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(118, 20);
             this.numericUpDown1.TabIndex = 17;
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 397);
+            this.label9.Location = new System.Drawing.Point(12, 396);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(126, 13);
             this.label9.TabIndex = 16;
@@ -310,35 +342,20 @@
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(135, 371);
+            this.textBox5.Location = new System.Drawing.Point(138, 355);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(118, 20);
             this.textBox5.TabIndex = 15;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 371);
+            this.label7.Location = new System.Drawing.Point(12, 359);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(117, 13);
             this.label7.TabIndex = 14;
             this.label7.Text = "Maximum points for test";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(135, 345);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(118, 20);
-            this.textBox6.TabIndex = 13;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 345);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(95, 13);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Count of questions";
             // 
             // textBox4
             // 
@@ -347,6 +364,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(148, 135);
             this.textBox4.TabIndex = 11;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // label6
             // 
@@ -364,6 +382,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(148, 129);
             this.textBox3.TabIndex = 9;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label5
             // 
@@ -380,6 +399,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(148, 20);
             this.textBox2.TabIndex = 7;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label4
             // 
@@ -396,45 +416,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(148, 20);
             this.textBox1.TabIndex = 5;
-            // 
-            // openTestToolStripMenuItem
-            // 
-            this.openTestToolStripMenuItem.Name = "openTestToolStripMenuItem";
-            this.openTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.openTestToolStripMenuItem.Text = "Open test";
-            // 
-            // text_of_question
-            // 
-            this.text_of_question.HeaderText = "Text of question";
-            this.text_of_question.Name = "text_of_question";
-            this.text_of_question.ReadOnly = true;
-            this.text_of_question.Width = 425;
-            // 
-            // points
-            // 
-            this.points.HeaderText = "Points";
-            this.points.Name = "points";
-            this.points.ReadOnly = true;
-            // 
-            // count_of_answers
-            // 
-            this.count_of_answers.HeaderText = "Count of answers";
-            this.count_of_answers.Name = "count_of_answers";
-            this.count_of_answers.ReadOnly = true;
-            // 
-            // TextOfAnswer
-            // 
-            this.TextOfAnswer.HeaderText = "Text of answer";
-            this.TextOfAnswer.Name = "TextOfAnswer";
-            this.TextOfAnswer.ReadOnly = true;
-            // 
-            // isTrueAnswer
-            // 
-            this.isTrueAnswer.HeaderText = "Is true answer";
-            this.isTrueAnswer.Name = "isTrueAnswer";
-            this.isTrueAnswer.ReadOnly = true;
-            this.isTrueAnswer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.isTrueAnswer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Form1
             // 
@@ -495,10 +477,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label errLabelCountOfQuestions;
         private System.Windows.Forms.Label errLabelMinimumPassingPercent;
         private System.Windows.Forms.Label errLabelMaximumPointsForTest;
         private System.Windows.Forms.ToolStripMenuItem openTestToolStripMenuItem;

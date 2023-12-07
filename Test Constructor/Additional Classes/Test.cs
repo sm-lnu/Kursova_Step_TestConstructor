@@ -13,11 +13,11 @@ namespace Test_Constructor.Additional_Classes
         public String description { get; set; }
         public String infoForTestTaker { get; set; }
         public double maximumPointsForTest { get; set; }
-        public double minimumPassingPercent { get; set; }
+        public decimal minimumPassingPercent { get; set; }
         public List<Question> questions { get; set; }
 
         public Test() => createListOfQuestion();
-        public Test(string author, string title, string description, string infoForTestTaker, double maximumPointsForTest, double minimumPassingPercent, int countOfQuestions)
+        public Test(string author, string title, string description, string infoForTestTaker, double maximumPointsForTest, decimal minimumPassingPercent, int countOfQuestions)
         {
             this.author = author;
             this.title = title;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Eventing.Reader;
 using System.Windows.Forms;
 using Test_Constructor.Additional_Classes;
 
@@ -19,6 +20,8 @@ namespace Test_Constructor
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             lockOrElements(true);
+            toolStripMenuItem3.Enabled = true;
+            toolStripMenuItem4.Enabled = true;
         }
 
         private void lockOrElements(bool value)
@@ -35,7 +38,6 @@ namespace Test_Constructor
             textBox3.Enabled = value;
             textBox4.Enabled = value;
             textBox5.Enabled = value;
-            textBox6.Enabled = value;
 
             numericUpDown1.Enabled = value;
         }
@@ -96,6 +98,8 @@ namespace Test_Constructor
                 dataGridView1.Refresh();
                 dataGridView2.Refresh();
             }
+            else
+                MessageBox.Show("No row selected.");
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -114,6 +118,8 @@ namespace Test_Constructor
                     }
                 }
             }
+            else
+                MessageBox.Show("No row selected.");
         }
 
         private void editRowInDataGridView(Question question)
@@ -126,5 +132,49 @@ namespace Test_Constructor
             dataGridView2.Refresh();
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            test.author = textBox1.Text;
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            test.title = textBox2.Text;
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            test.description = textBox3.Text;
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            test.infoForTestTaker = textBox4.Text;
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                test.maximumPointsForTest = int.Parse(textBox5.Text);
+                errLabelMaximumPointsForTest.Visible = false;
+            }
+            catch (FormatException)
+            {
+                textBox5.Text = "0";
+                errLabelMaximumPointsForTest.Visible = true;
+            }
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDown1.Value > 0)
+            {
+                test.minimumPassingPercent = numericUpDown1.Value;
+                errLabelMinimumPassingPercent.Visible = false;
+            }
+            else
+                errLabelMinimumPassingPercent.Visible = true;
+        }
     }
 }
