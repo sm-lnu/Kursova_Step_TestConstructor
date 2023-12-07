@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.text_of_question = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.points = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.count_of_answers = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -49,6 +46,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.errLabelMinimumPassingPercent = new System.Windows.Forms.Label();
+            this.errLabelMaximumPointsForTest = new System.Windows.Forms.Label();
+            this.errLabelCountOfQuestions = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
@@ -62,9 +62,10 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.errLabelCountOfQuestions = new System.Windows.Forms.Label();
-            this.errLabelMaximumPointsForTest = new System.Windows.Forms.Label();
-            this.errLabelMinimumPassingPercent = new System.Windows.Forms.Label();
+            this.text_of_question = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.points = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.count_of_answers = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.openTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -86,25 +87,6 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(741, 150);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // text_of_question
-            // 
-            this.text_of_question.HeaderText = "Test of question";
-            this.text_of_question.Name = "text_of_question";
-            this.text_of_question.Visible = false;
-            this.text_of_question.Width = 425;
-            // 
-            // points
-            // 
-            this.points.HeaderText = "Points";
-            this.points.Name = "points";
-            this.points.Visible = false;
-            // 
-            // count_of_answers
-            // 
-            this.count_of_answers.HeaderText = "Count of answers";
-            this.count_of_answers.Name = "count_of_answers";
-            this.count_of_answers.Visible = false;
             // 
             // dataGridView2
             // 
@@ -136,6 +118,7 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
+            this.openTestToolStripMenuItem,
             this.toolStripMenuItem3,
             this.toolStripMenuItem4,
             this.toolStripMenuItem2,
@@ -147,7 +130,7 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(155, 22);
             this.toolStripMenuItem1.Text = "Create new test";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
@@ -155,25 +138,25 @@
             // 
             this.toolStripMenuItem3.Enabled = false;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(155, 22);
             this.toolStripMenuItem3.Text = "Save test";
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Enabled = false;
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(155, 22);
             this.toolStripMenuItem4.Text = "Close test";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 6);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(155, 22);
             this.toolStripMenuItem5.Text = "Exit";
             // 
             // label1
@@ -276,6 +259,30 @@
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Test";
+            // 
+            // errLabelMinimumPassingPercent
+            // 
+            this.errLabelMinimumPassingPercent.AutoSize = true;
+            this.errLabelMinimumPassingPercent.Location = new System.Drawing.Point(12, 384);
+            this.errLabelMinimumPassingPercent.Name = "errLabelMinimumPassingPercent";
+            this.errLabelMinimumPassingPercent.Size = new System.Drawing.Size(0, 13);
+            this.errLabelMinimumPassingPercent.TabIndex = 19;
+            // 
+            // errLabelMaximumPointsForTest
+            // 
+            this.errLabelMaximumPointsForTest.AutoSize = true;
+            this.errLabelMaximumPointsForTest.Location = new System.Drawing.Point(12, 358);
+            this.errLabelMaximumPointsForTest.Name = "errLabelMaximumPointsForTest";
+            this.errLabelMaximumPointsForTest.Size = new System.Drawing.Size(0, 13);
+            this.errLabelMaximumPointsForTest.TabIndex = 18;
+            // 
+            // errLabelCountOfQuestions
+            // 
+            this.errLabelCountOfQuestions.AutoSize = true;
+            this.errLabelCountOfQuestions.Location = new System.Drawing.Point(12, 332);
+            this.errLabelCountOfQuestions.Name = "errLabelCountOfQuestions";
+            this.errLabelCountOfQuestions.Size = new System.Drawing.Size(0, 13);
+            this.errLabelCountOfQuestions.TabIndex = 7;
             // 
             // numericUpDown1
             // 
@@ -382,29 +389,27 @@
             this.textBox1.Size = new System.Drawing.Size(148, 20);
             this.textBox1.TabIndex = 5;
             // 
-            // errLabelCountOfQuestions
+            // text_of_question
             // 
-            this.errLabelCountOfQuestions.AutoSize = true;
-            this.errLabelCountOfQuestions.Location = new System.Drawing.Point(12, 332);
-            this.errLabelCountOfQuestions.Name = "errLabelCountOfQuestions";
-            this.errLabelCountOfQuestions.Size = new System.Drawing.Size(0, 13);
-            this.errLabelCountOfQuestions.TabIndex = 7;
+            this.text_of_question.HeaderText = "Text of question";
+            this.text_of_question.Name = "text_of_question";
+            this.text_of_question.Width = 425;
             // 
-            // errLabelMaximumPointsForTest
+            // points
             // 
-            this.errLabelMaximumPointsForTest.AutoSize = true;
-            this.errLabelMaximumPointsForTest.Location = new System.Drawing.Point(12, 358);
-            this.errLabelMaximumPointsForTest.Name = "errLabelMaximumPointsForTest";
-            this.errLabelMaximumPointsForTest.Size = new System.Drawing.Size(0, 13);
-            this.errLabelMaximumPointsForTest.TabIndex = 18;
+            this.points.HeaderText = "Points";
+            this.points.Name = "points";
             // 
-            // errLabelMinimumPassingPercent
+            // count_of_answers
             // 
-            this.errLabelMinimumPassingPercent.AutoSize = true;
-            this.errLabelMinimumPassingPercent.Location = new System.Drawing.Point(12, 384);
-            this.errLabelMinimumPassingPercent.Name = "errLabelMinimumPassingPercent";
-            this.errLabelMinimumPassingPercent.Size = new System.Drawing.Size(0, 13);
-            this.errLabelMinimumPassingPercent.TabIndex = 19;
+            this.count_of_answers.HeaderText = "Count of answers";
+            this.count_of_answers.Name = "count_of_answers";
+            // 
+            // openTestToolStripMenuItem
+            // 
+            this.openTestToolStripMenuItem.Name = "openTestToolStripMenuItem";
+            this.openTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openTestToolStripMenuItem.Text = "Open test";
             // 
             // Form1
             // 
@@ -454,9 +459,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn text_of_question;
-        private System.Windows.Forms.DataGridViewTextBoxColumn points;
-        private System.Windows.Forms.DataGridViewTextBoxColumn count_of_answers;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox4;
@@ -474,6 +476,10 @@
         private System.Windows.Forms.Label errLabelCountOfQuestions;
         private System.Windows.Forms.Label errLabelMinimumPassingPercent;
         private System.Windows.Forms.Label errLabelMaximumPointsForTest;
+        private System.Windows.Forms.DataGridViewTextBoxColumn text_of_question;
+        private System.Windows.Forms.DataGridViewTextBoxColumn points;
+        private System.Windows.Forms.DataGridViewTextBoxColumn count_of_answers;
+        private System.Windows.Forms.ToolStripMenuItem openTestToolStripMenuItem;
     }
 }
 

@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Windows.Forms;
+using Test_Constructor.Additional_Classes;
 
 namespace Test_Constructor
 {
     public partial class Form1 : Form
     {
+        private Test test;
         public Form1()
         {
             InitializeComponent();
             lockOrElements(false);
+            test = new Test();
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -37,8 +40,23 @@ namespace Test_Constructor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AddQuestion addQuestionForm = new AddQuestion();
-            addQuestionForm.ShowDialog();
+            using (AddQuestion addQuestion = new AddQuestion(new Question()))
+            {
+                addQuestion.QuestionReturned += AddQuestionForm_QuestionReturned;
+                addQuestion.ShowDialog();
+            }
+        }
+
+        private void AddQuestionForm_QuestionReturned(object sender, EventArgs e)
+        {
+            AddQuestion addQuestionForm = (AddQuestion)sender;
+            Question returnedQuestion = addQuestionForm.question;
+
+            if (returnedQuestion != null)
+            {
+                test.questions.Add(returnedQuestion);
+                dataGridView1.Rows.Add(returnedQuestion.textOfQuestion, returnedQuestion.points,returnedQuestion.answers.Count);
+            }
         }
     }
 }

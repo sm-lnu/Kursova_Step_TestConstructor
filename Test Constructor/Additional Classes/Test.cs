@@ -16,6 +16,7 @@ namespace Test_Constructor.Additional_Classes
         public double minimumPassingPercent { get; set; }
         public List<Question> questions { get; set; }
 
+        public Test() => createListOfQuestion();
         public Test(string author, string title, string description, string infoForTestTaker, double maximumPointsForTest, double minimumPassingPercent, int countOfQuestions)
         {
             this.author = author;
@@ -24,7 +25,8 @@ namespace Test_Constructor.Additional_Classes
             this.infoForTestTaker = infoForTestTaker;
             this.maximumPointsForTest = maximumPointsForTest;
             this.minimumPassingPercent = minimumPassingPercent;
-            this.questions = new List<Question>(countOfQuestions);
+            createListOfQuestion();
         }
+        private void createListOfQuestion() => questions = new List<Question>();
     }
 }

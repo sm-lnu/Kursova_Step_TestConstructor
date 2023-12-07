@@ -15,10 +15,10 @@ namespace Test_Constructor
         public Question question { get; private set; }
         public event EventHandler QuestionReturned;
 
-        public AddQuestion()
+        public AddQuestion(Question question)
         {
             InitializeComponent();
-            question = new Question();
+            this.question = question;
         }
 
         private void button1_Click(object sender, EventArgs e)
