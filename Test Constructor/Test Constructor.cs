@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Windows.Forms;
-using Test_Constructor.Additional_Classes;
-using Test_Constructor.SerializationDeserializationQuestion;
+using AdditionalClasses;
+using AdditionalClasses.HelpingClasses;
 
 namespace Test_Constructor
 {
