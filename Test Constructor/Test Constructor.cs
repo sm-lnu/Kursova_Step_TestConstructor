@@ -10,13 +10,33 @@ namespace Test_Constructor
     public partial class Form1 : Form
     {
         private Test test;
+        private bool isDataChanged = false;
         private int selectedRowIndex = -1;
 
         public Form1()
         {
             InitializeComponent();
-            lockOrElements(false);
+            InitializeForm();
+        }
+
+        private void InitializeForm()
+        {
             test = new Test();
+            lockOrElements(false);
+            this.FormClosing += formClosing;
+        }
+
+        private void formClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isDataChanged)
+            {
+                DialogResult result = MessageBox.Show("Do you want to save changes?", "Confirmation", MessageBoxButtons.YesNoCancel);
+
+                if (result == DialogResult.Cancel)
+                    e.Cancel = true;
+                else if (result == DialogResult.Yes)
+                    SaveTest();
+            }
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -160,6 +180,7 @@ namespace Test_Constructor
             {
                 test.maximumPointsForTest = double.Parse(textBox5.Text);
                 errLabelMaximumPointsForTest.Visible = false;
+                isDataChanged = true;
             }
             catch (FormatException)
             {
@@ -174,12 +195,18 @@ namespace Test_Constructor
             {
                 test.minimumPassingPercent = numericUpDown1.Value;
                 errLabelMinimumPassingPercent.Visible = false;
+                isDataChanged = true;
             }
             else
                 errLabelMinimumPassingPercent.Visible = true;
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            SaveTest();
+        }
+
+        private void SaveTest()
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
@@ -196,6 +223,7 @@ namespace Test_Constructor
                     File.WriteAllText(selectedFilePath, serializedXml);
 
                     MessageBox.Show("XML file saved successfully!");
+                    isDataChanged = false;
                 }
             }
         }
@@ -250,6 +278,11 @@ namespace Test_Constructor
 
             dataGridView1.Refresh();
             dataGridView2.Refresh();
+        }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
