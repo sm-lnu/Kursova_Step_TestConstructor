@@ -1,19 +1,48 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
+using AdditionalClasses;
+using AdditionalClasses.HelpingClasses;
 
 namespace Test_Constructor
 {
     public partial class Form1 : Form
     {
+        private Test test;
+        private bool isDataChanged = false;
+        private int selectedRowIndex = -1;
+
         public Form1()
         {
             InitializeComponent();
+            InitializeForm();
+        }
+
+        private void InitializeForm()
+        {
+            test = new Test();
             lockOrElements(false);
+            this.FormClosing += formClosing;
+        }
+
+        private void formClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isDataChanged)
+            {
+                DialogResult result = MessageBox.Show("Do you want to save changes?", "Confirmation", MessageBoxButtons.YesNoCancel);
+
+                if (result == DialogResult.Cancel)
+                    e.Cancel = true;
+                else if (result == DialogResult.Yes)
+                    SaveTest();
+            }
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             lockOrElements(true);
+            toolStripMenuItem3.Enabled = true;
+            toolStripMenuItem4.Enabled = true;
         }
 
         private void lockOrElements(bool value)
@@ -30,15 +59,229 @@ namespace Test_Constructor
             textBox3.Enabled = value;
             textBox4.Enabled = value;
             textBox5.Enabled = value;
-            textBox6.Enabled = value;
 
             numericUpDown1.Enabled = value;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AddQuestion addQuestionForm = new AddQuestion();
-            addQuestionForm.ShowDialog();
+            using (AddQuestion addQuestion = new AddQuestion(new Question()))
+            {
+                addQuestion.QuestionReturned += AddQuestionForm_QuestionReturned;
+                addQuestion.ShowDialog();
+            }
+        }
+
+        private void AddQuestionForm_QuestionReturned(object sender, EventArgs e)
+        {
+            AddQuestion addQuestionForm = (AddQuestion)sender;
+            Question returnedQuestion = addQuestionForm.question;
+
+            if (returnedQuestion != null)
+            {
+                test.questions.Add(returnedQuestion);
+                dataGridView1.Rows.Add(returnedQuestion.textOfQuestion, returnedQuestion.points,returnedQuestion.answers.Count);
+
+                dataGridView1.Refresh();
+                dataGridView2.Refresh();
+            }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+                selectedRowIndex = e.RowIndex;
+            else
+                selectedRowIndex = -1;
+
+            if (selectedRowIndex!=-1)
+            {
+
+                if (selectedRowIndex <= test.questions.Count-1) {
+                    dataGridView2.Rows.Clear();
+                    Question question = test.questions[selectedRowIndex];
+                    foreach (var a in question.answers)
+                        dataGridView2.Rows.Add(a.textOfAnswer, a.isTrueAnswer);
+
+                    pictureBox1.Image = question.image;
+                    dataGridView2.Refresh();
+                }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (selectedRowIndex >= 0 && selectedRowIndex < dataGridView1.Rows.Count && test.questions.Count-1 >= selectedRowIndex) {
+                test.questions
+                        .RemoveAt(selectedRowIndex);
+                dataGridView1.Rows.RemoveAt(selectedRowIndex);
+
+                dataGridView1.Refresh();
+                dataGridView2.Refresh();
+            }
+            else
+                MessageBox.Show("No row selected.");
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (selectedRowIndex >= 0 && selectedRowIndex < dataGridView1.Rows.Count && test.questions.Count - 1 >= selectedRowIndex)
+            {
+                using (AddQuestion addQuestion = new AddQuestion(test.questions[selectedRowIndex]))
+                {
+                    addQuestion.ShowDialog();
+
+                    Question returnedQuestion = addQuestion.question;
+
+                    if (returnedQuestion != null)
+                    {
+                        test.questions[selectedRowIndex] = returnedQuestion;
+                        editRowInDataGridView(returnedQuestion);
+                    }
+                }
+            }
+            else
+                MessageBox.Show("No row selected.");
+        }
+
+        private void editRowInDataGridView(Question question)
+        {
+            dataGridView1.Rows[selectedRowIndex].Cells[0].Value = question.textOfQuestion;
+            dataGridView1.Rows[selectedRowIndex].Cells[1].Value = question.points;
+            dataGridView1.Rows[selectedRowIndex].Cells[2].Value = question.answers.Count;
+
+            dataGridView1.Refresh();
+            dataGridView2.Refresh();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            test.author = textBox1.Text;
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            test.title = textBox2.Text;
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            test.description = textBox3.Text;
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            test.infoForTestTaker = textBox4.Text;
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                test.maximumPointsForTest = double.Parse(textBox5.Text);
+                errLabelMaximumPointsForTest.Visible = false;
+                isDataChanged = true;
+            }
+            catch (FormatException)
+            {
+                textBox5.Text = "0";
+                errLabelMaximumPointsForTest.Visible = true;
+            }
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDown1.Value > 0)
+            {
+                test.minimumPassingPercent = numericUpDown1.Value;
+                errLabelMinimumPassingPercent.Visible = false;
+                isDataChanged = true;
+            }
+            else
+                errLabelMinimumPassingPercent.Visible = true;
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            SaveTest();
+        }
+
+        private void SaveTest()
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "XML Files|*.xml|All Files|*.*";
+                saveFileDialog.Title = "Save XML File";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedFilePath = saveFileDialog.FileName;
+
+                    XmlSerializerHelper<Test> xmlSerializerHelper = new XmlSerializerHelper<Test>();
+                    string serializedXml = xmlSerializerHelper.SerializeToXml(test);
+
+                    File.WriteAllText(selectedFilePath, serializedXml);
+
+                    MessageBox.Show("XML file saved successfully!");
+                    isDataChanged = false;
+                }
+            }
+        }
+
+        private void openTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string selectedFilePath = OpenFileExplorer();
+
+            if (!string.IsNullOrEmpty(selectedFilePath))
+            {
+                string xml = File.ReadAllText(selectedFilePath);
+                if (xml != null)
+                {
+                    XmlSerializerHelper<Test> xmlSerializerHelper = new XmlSerializerHelper<Test>();
+                    Test deserializedTest = xmlSerializerHelper.DeserializeFromXml(xml);
+                    test = deserializedTest;
+                    fillTestFields();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to deserialize the object.");
+                }
+            }
+            else
+                MessageBox.Show("No file selected.");
+        }
+        private string OpenFileExplorer()
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+               openFileDialog.Filter = "XML Files|*.xml|All Files|*.*";
+               openFileDialog.Title = "Select an XML File";
+
+               if (openFileDialog.ShowDialog() == DialogResult.OK)
+                  return openFileDialog.FileName;
+
+               return string.Empty;
+            }
+        }
+        private void fillTestFields()
+        {
+            textBox1.Text = test.author;
+            textBox2.Text = test.title;
+            textBox3.Text = test.description;
+            textBox4.Text = test.infoForTestTaker;
+            textBox5.Text = test.maximumPointsForTest.ToString();
+            numericUpDown1.Value = test.minimumPassingPercent;
+            foreach (var q in test.questions)
+                dataGridView1.Rows.Add(q.textOfQuestion,q.points,q.answers.Count);
+
+            lockOrElements(true);
+
+            dataGridView1.Refresh();
+            dataGridView2.Refresh();
+        }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

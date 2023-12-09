@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Linq;
-using Test_Constructor.Additional_Classes;
+using AdditionalClasses;
 using System.Drawing;
-using System.Text;
-using System.Xml;
-using System.IO;
 
 namespace Test_Constructor
 {
@@ -15,10 +12,12 @@ namespace Test_Constructor
         public Question question { get; private set; }
         public event EventHandler QuestionReturned;
 
-        public AddQuestion()
+        public AddQuestion(Question question)
         {
             InitializeComponent();
-            question = new Question();
+            this.question = question;
+            if (question.answers.Count != 0)
+                fillFieldsFromExistingQuestion();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -99,9 +98,11 @@ namespace Test_Constructor
         private void button3_Click(object sender, EventArgs e)
         {
             (string textOfAnswer, bool isTrueAnswer) = getDataFromDataGridView();
-            question.answers
-                    .RemoveAll(a => a.textOfAnswer == textOfAnswer && a.isTrueAnswer == isTrueAnswer);
-            dataGridView1.Rows.RemoveAt(selectedRowIndex);
+            if (textOfAnswer!=null) {
+                question.answers
+                        .RemoveAll(a => a.textOfAnswer == textOfAnswer && a.isTrueAnswer == isTrueAnswer);
+                dataGridView1.Rows.RemoveAt(selectedRowIndex);
+            }
         }
         private (string,bool) getDataFromDataGridView()
         {
@@ -117,13 +118,6 @@ namespace Test_Constructor
                 MessageBox.Show("No row selected.");
             return (null, false);
         }
-        private void editRowInDataGridView(Answer answer)
-        {
-            dataGridView1.Rows[selectedRowIndex].Cells[0].Value = answer.textOfAnswer;
-            dataGridView1.Rows[selectedRowIndex].Cells[1].Value = answer.isTrueAnswer;
-
-            dataGridView1.Refresh();
-        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -135,12 +129,27 @@ namespace Test_Constructor
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string selectedFilePath = openFileDialog.FileName;
-                    Image selectedImage = Image.FromFile(selectedFilePath);
+                    Image selectedImage = LoadAndResizeImage(selectedFilePath);
                     pictureBox1.Image = selectedImage;
+                    question.image = selectedImage;
                 }
             }
         }
+        private Image LoadAndResizeImage(string imagePath)
+        {
+            Image originalImage = Image.FromFile(imagePath);
+            int desiredHeight = 295;
+            int proportionalWidth = (int)((float)desiredHeight / originalImage.Height * originalImage.Width);
+            Image resizedImage = new Bitmap(originalImage, new Size(proportionalWidth, desiredHeight));
+            return resizedImage;
+        }
+        private void editRowInDataGridView(Answer answer)
+        {
+            dataGridView1.Rows[selectedRowIndex].Cells[0].Value = answer.textOfAnswer;
+            dataGridView1.Rows[selectedRowIndex].Cells[1].Value = answer.isTrueAnswer;
 
+            dataGridView1.Refresh();
+        }
         private void button5_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = null;
@@ -150,6 +159,19 @@ namespace Test_Constructor
         private void button7_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void fillFieldsFromExistingQuestion()
+        {
+            textBox1.Text = question.textOfQuestion;
+            numericUpDown1.Value = question.points;
+            pictureBox1.Image = question.image;
+            foreach(var a in question.answers)
+                dataGridView1.Rows.Add(a.textOfAnswer, a.isTrueAnswer);
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            question.points = numericUpDown1.Value;
         }
     }
 }

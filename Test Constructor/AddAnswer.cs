@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Test_Constructor.Additional_Classes;
+using AdditionalClasses;
 
 namespace Test_Constructor
 {
